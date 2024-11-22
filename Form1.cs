@@ -139,10 +139,8 @@ namespace RadioheadSalesDashboard
         // Méthode pour changer la couleur des graphiques.
         private void ChangeChartColors()
         {
-            // Récupère une couleur aléatoire
             SKColor randomColor = GetRandomColor();
 
-            // Applique cette couleur à chaque série de données des graphiques
             ApplyColorToChart(salesChart, randomColor);
             ApplyColorToChart(stockChart, randomColor);
         }
@@ -181,7 +179,6 @@ namespace RadioheadSalesDashboard
             using (var command = new SqlCommand(query, connection))
             using (var reader = command.ExecuteReader())
             {
-                // Parcourt les résultats de la requête et met à jour le dictionnaire des données.
                 while (reader.Read())
                 {
                     var albumName = reader.GetString(0);
@@ -247,7 +244,6 @@ namespace RadioheadSalesDashboard
 
                             totalRevenueLabel.Text = $"Revenu total : {totalRevenue:F2} €";
 
-                            MessageBox.Show($"La vente de l'album {albumName} a été effectuée avec succès.", "Vente traitée", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else
