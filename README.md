@@ -11,3 +11,7 @@ Le but de ce projet est de créer un tableau de bord interactif pour suivre les 
 - **LiveCharts** : Bibliothèque pour les graphiques interactifs.
 - **SQL Server** : Base de données utilisée pour stocker les ventes et les informations sur le stock des albums.
 - **SkiaSharp** : Bibliothèque utilisée pour le rendu graphique de LiveCharts.
+
+## Aperçu application
+
+![Tableau de Bord Radiohead](assets/images/capture.png)
