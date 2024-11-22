@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RadioheadSalesDashboard")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+16675f2763d6cb372caf27e492b2e5d1eaee3e3f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+638d3b5db5cf7f10af0ec28931a2342aab6b40ca")]
 [assembly: System.Reflection.AssemblyProductAttribute("RadioheadSalesDashboard")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RadioheadSalesDashboard")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -34,7 +34,7 @@
             // reloadStockButton
             // 
             this.reloadStockButton.Text = "Reload Stock";
-            this.reloadStockButton.Location = new System.Drawing.Point(10, 490);
+            this.reloadStockButton.Location = new System.Drawing.Point(860, 840);
             this.reloadStockButton.Size = new System.Drawing.Size(120, 40);
             this.reloadStockButton.BackColor = System.Drawing.Color.CornflowerBlue;
             this.reloadStockButton.ForeColor = System.Drawing.Color.White;
@@ -55,20 +55,20 @@
             // salesChart
             // 
             this.salesChart.Name = "salesChart";
-            this.salesChart.Size = new System.Drawing.Size(900, 300);
+            this.salesChart.Size = new System.Drawing.Size(1600, 600);
             this.salesChart.TabIndex = 0;
-            this.salesChart.Left = 12;
-            this.salesChart.Top = 12;
+            this.salesChart.Left = 42;
+            this.salesChart.Top = 42;
             this.salesChart.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
 
             // 
             // stockChart
             // 
             this.stockChart.Name = "stockChart";
-            this.stockChart.Size = new System.Drawing.Size(900, 300);
+            this.stockChart.Size = new System.Drawing.Size(1600, 600);
             this.stockChart.TabIndex = 1;
-            this.stockChart.Left = 12;
-            this.stockChart.Top = 320;
+            this.stockChart.Left = 42;
+            this.stockChart.Top = 700;
             this.stockChart.BackColor = System.Drawing.Color.FromArgb(45, 45, 48);
 
             // 
@@ -81,7 +81,7 @@
             // recentSalesLabel
             // 
             this.recentSalesLabel.AutoSize = true;
-            this.recentSalesLabel.Location = new System.Drawing.Point(12, 630);
+            this.recentSalesLabel.Location = new System.Drawing.Point(42, 1350);
             this.recentSalesLabel.Name = "recentSalesLabel";
             this.recentSalesLabel.Size = new System.Drawing.Size(100, 20);
             this.recentSalesLabel.TabIndex = 2;
@@ -92,7 +92,7 @@
             // totalRevenueLabel
             // 
             this.totalRevenueLabel.AutoSize = true;
-            this.totalRevenueLabel.Location = new System.Drawing.Point(12, 660);
+            this.totalRevenueLabel.Location = new System.Drawing.Point(42, 1400);
             this.totalRevenueLabel.Name = "totalRevenueLabel";
             this.totalRevenueLabel.Size = new System.Drawing.Size(120, 20);
             this.totalRevenueLabel.TabIndex = 3;
@@ -104,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 900);
+            this.ClientSize = new System.Drawing.Size(1700, 1500);
             this.Controls.Add(this.salesChart);
             this.Controls.Add(this.stockChart);
             this.Controls.Add(this.recentSalesLabel);
