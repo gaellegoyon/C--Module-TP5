@@ -3,6 +3,7 @@ using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using SkiaSharp;
 using LiveChartsCore.SkiaSharpView.WinForms;
+using LiveChartsCore.SkiaSharpView.Painting;
 
 namespace RadioheadSalesDashboard
 {
@@ -123,6 +124,9 @@ namespace RadioheadSalesDashboard
                     connection.Open();
                     UpdateSalesData(connection);
                     UpdateStockData(connection);
+
+                    // Change la couleur des graphiques après chaque mise à jour
+                    ChangeChartColors();
                 }
                 catch (Exception ex)
                 {
@@ -131,6 +135,29 @@ namespace RadioheadSalesDashboard
                 }
             }
         }
+
+        // Méthode pour changer la couleur des graphiques.
+        private void ChangeChartColors()
+        {
+            // Récupère une couleur aléatoire
+            SKColor randomColor = GetRandomColor();
+
+            // Applique cette couleur à chaque série de données des graphiques
+            ApplyColorToChart(salesChart, randomColor);
+            ApplyColorToChart(stockChart, randomColor);
+        }
+
+        // Méthode pour appliquer la couleur à un graphique spécifique.
+        private void ApplyColorToChart(CartesianChart chart, SKColor color)
+        {
+            var series = chart.Series.FirstOrDefault() as ColumnSeries<int>;
+            if (series != null)
+            {
+                series.Fill = new SolidColorPaint(color);
+            }
+            chart.Invalidate();
+        }
+
 
         // Méthode qui met à jour les données des ventes dans le graphique des ventes.
         private void UpdateSalesData(SqlConnection connection)
@@ -328,5 +355,15 @@ namespace RadioheadSalesDashboard
             string logMessage = $"{DateTime.Now}: {ex.Message}\n{ex.StackTrace}\n";
             File.AppendAllText(logFilePath, logMessage);
         }
+
+        private SKColor GetRandomColor()
+        {
+            Random rand = new Random();
+            byte r = (byte)rand.Next(0, 256);
+            byte g = (byte)rand.Next(0, 256);
+            byte b = (byte)rand.Next(0, 256);
+            return new SKColor(r, g, b);
+        }
+
     }
 }
