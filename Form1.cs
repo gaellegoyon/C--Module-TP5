@@ -1,14 +1,8 @@
-using System;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Windows.Forms;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using SkiaSharp;
-using System.Collections.Generic;
-using System.IO;
 using LiveChartsCore.SkiaSharpView.WinForms;
-using System.Globalization;
 
 namespace RadioheadSalesDashboard
 {
@@ -20,20 +14,20 @@ namespace RadioheadSalesDashboard
         // Compteur des ventes récentes.
         private int recentSalesCount = 0;
 
-        // Dictionnaire statique des albums disponibles.
-        private static readonly Dictionary<string, string> albums = new Dictionary<string, string>
-        {
-            { "OK Computer", "OK Computer" },
-            { "Kid A", "Kid A" },
-            { "In Rainbows", "In Rainbows" }
-        };
+        // albums disponibles.
+        private static readonly List<string> albums = new List<string>
+{
+    "OK Computer",
+    "Kid A",
+    "In Rainbows"
+};
 
         // Initialise les graphiques et charge les données de revenu total.
         public Form1()
         {
-            InitializeComponent();  // Initialise les composants de l'interface graphique.
-            InitializeCharts();     // Initialise les graphiques de ventes et de stock.
-            updateTimer.Start();    // Démarre le timer de mise à jour périodique des données.
+            InitializeComponent();
+            InitializeCharts();
+            updateTimer.Start();
 
             try
             {
@@ -83,7 +77,7 @@ namespace RadioheadSalesDashboard
             salesChart.YAxes = new Axis[] {
                 new Axis {
                     Labeler = value => value.ToString("N"),
-                    Name = "Sales",
+                    Name = "Ventes",
                     LabelsPaint = new LiveChartsCore.SkiaSharpView.Painting.SolidColorPaint(SKColors.White),
                     NamePaint = new LiveChartsCore.SkiaSharpView.Painting.SolidColorPaint(SKColors.White)
                 }
@@ -189,7 +183,7 @@ namespace RadioheadSalesDashboard
         {
             if (albums.Count > 0)
             {
-                string randomAlbum = albums.Keys.ElementAt(random.Next(albums.Count));
+                string randomAlbum = albums[random.Next(albums.Count)];
                 AddSale(randomAlbum);
             }
             else
@@ -218,16 +212,12 @@ namespace RadioheadSalesDashboard
                             recentSalesCount++;
                             recentSalesLabel.Text = $"Ventes récentes : {recentSalesCount}";
 
-                            // Récupérer le prix de l'album
                             double albumPrice = GetAlbumPrice(albumName, connection);
 
-                            // Récupérer le revenu total actuel depuis la base de données
                             double totalRevenue = GetTotalRevenue(connection);
 
-                            // Ajouter le prix de l'album au revenu total
                             totalRevenue += albumPrice;
 
-                            // Mettre à jour l'affichage du revenu total
                             totalRevenueLabel.Text = $"Revenu total : {totalRevenue:F2} €";
 
                             MessageBox.Show($"La vente de l'album {albumName} a été effectuée avec succès.", "Vente traitée", MessageBoxButtons.OK, MessageBoxIcon.Information);
