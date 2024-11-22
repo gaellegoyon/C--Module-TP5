@@ -216,15 +216,18 @@ namespace RadioheadSalesDashboard
                             transaction.Commit();
 
                             recentSalesCount++;
-                            recentSalesLabel.Text = $"Ventes recentes : {recentSalesCount}";
+                            recentSalesLabel.Text = $"Ventes récentes : {recentSalesCount}";
 
+                            // Récupérer le prix de l'album
                             double albumPrice = GetAlbumPrice(albumName, connection);
-                            string revenueText = totalRevenueLabel.Text.Split('€')[0].Trim();
-                            string revenueValueText = revenueText.Split(':')[1].Trim();
 
-                            double totalRevenue = Convert.ToDouble(revenueValueText, CultureInfo.InvariantCulture);
+                            // Récupérer le revenu total actuel depuis la base de données
+                            double totalRevenue = GetTotalRevenue(connection);
 
+                            // Ajouter le prix de l'album au revenu total
                             totalRevenue += albumPrice;
+
+                            // Mettre à jour l'affichage du revenu total
                             totalRevenueLabel.Text = $"Revenu total : {totalRevenue:F2} €";
 
                             MessageBox.Show($"La vente de l'album {albumName} a été effectuée avec succès.", "Vente traitée", MessageBoxButtons.OK, MessageBoxIcon.Information);
