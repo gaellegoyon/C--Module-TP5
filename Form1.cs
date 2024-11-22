@@ -16,11 +16,11 @@ namespace RadioheadSalesDashboard
 
         // albums disponibles.
         private static readonly List<string> albums = new List<string>
-{
-    "OK Computer",
-    "Kid A",
-    "In Rainbows"
-};
+            {
+                "OK Computer",
+                "Kid A",
+                "In Rainbows"
+        };
 
         // Initialise les graphiques et charge les données de revenu total.
         public Form1()
@@ -205,7 +205,7 @@ namespace RadioheadSalesDashboard
                     {
                         using (SqlTransaction transaction = connection.BeginTransaction())
                         {
-                            InsertSale(albumName, connection, transaction);
+                            UpdateSale(albumName, connection, transaction);
                             UpdateStock(albumName, connection, transaction);
                             transaction.Commit();
 
@@ -259,16 +259,27 @@ namespace RadioheadSalesDashboard
             }
         }
 
-        // Méthode pour insérer une vente dans la base de données.
-        private void InsertSale(string albumName, SqlConnection connection, SqlTransaction transaction)
+        // Méthode pour mettre à jour les ventes dans la base de données.
+        private void UpdateSale(string albumName, SqlConnection connection, SqlTransaction transaction)
         {
-            string query = "INSERT INTO AlbumSales (AlbumName, Sales) VALUES (@AlbumName, 1)";
+            string query = "UPDATE AlbumSales SET Sales = Sales + 1 WHERE AlbumName = @AlbumName";
             using (var command = new SqlCommand(query, connection, transaction))
             {
                 command.Parameters.AddWithValue("@AlbumName", albumName);
-                command.ExecuteNonQuery();
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected == 0)
+                {
+                    string insertQuery = "INSERT INTO AlbumSales (AlbumName, Sales) VALUES (@AlbumName, 1)";
+                    using (var insertCommand = new SqlCommand(insertQuery, connection, transaction))
+                    {
+                        insertCommand.Parameters.AddWithValue("@AlbumName", albumName);
+                        insertCommand.ExecuteNonQuery();
+                    }
+                }
             }
         }
+
 
         // Méthode pour mettre à jour le stock après une vente.
         private void UpdateStock(string albumName, SqlConnection connection, SqlTransaction transaction)
